@@ -9,7 +9,7 @@ SRC=$(shell pwd)
 ## Directory to write binaries to
 BIN=./WeeBins
 ## Compiler Flags
-FLAGS=-ffreestanding -m32 -g 
+FLAGS=-ffreestanding -m32 -g
 
 ## C source files
 CSRC := $(shell find ./ -name "*.c")
@@ -28,7 +28,6 @@ all: prebuild build
 
 debug: prebuild build
 	$(OBJCP) --only-keep-debug $(BIN)/kernel.elf $(BIN)/kernel.sym
-
 	qemu-system-x86_64 -drive format=raw,file=osimage_formated.bin,index=0,if=floppy -hda disk.img -m 128M -s -S &
 
 prebuild:	## Prebuild instructions
@@ -59,5 +58,5 @@ boot:
 	nasm $< -f elf -o $(BIN)/$(subst .asm,.o,$<) $(addprefix -i ,$(shell dirname $(shell echo $(CSRC) | tr ' ' '\n' | sort -u | xargs)))
 
 run: prebuild build
-## qemu-system-x86_64 -drive format=raw,file=os_image.bin,index=0,if=floppy,  -m 128M
+##  qemu-system-x86_64 -drive format=raw,file=os_image.bin,index=0,if=floppy,  -m 128M
 	qemu-system-x86_64 -d cpu_reset -drive format=raw,file=osimage_formated.bin,index=0,if=floppy -hda test_disk.img -m 128M
