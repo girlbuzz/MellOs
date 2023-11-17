@@ -1,12 +1,11 @@
 #include "../CPU/Interrupts/idt.h"
 #include "../Drivers/VGA_Text.h"
 
-int syscall_stub (regs *r, int number){
+int syscall_stub(regs *r, int number) {
     switch (number) {
         case 1:
             //sys_exit
             return sys_exit(r);
-            
         case 2:
             //sys_fork
             return sys_fork(r);
@@ -25,33 +24,32 @@ int syscall_stub (regs *r, int number){
     }
 }
 
-
-int sys_exit (regs *r){
+int sys_exit(regs *r) {
      kprint("sys_exit\n");
     return -1;   
 }
 
-int sys_fork (regs *r){
+int sys_fork(regs *r) {
     kprint("sys_fork\n");
     return -1;   
 }
 
-int sys_read (regs *r){
+int sys_read(regs *r) {
     kprint("sys_read\n");
     return -1;   
 }
 
-int sys_write (regs *r){
+int sys_write(regs *r) {
     kprint("sys_write\n");
     return -1;   
 }
 
-int sys_open (regs *r){
+int sys_open(regs *r) {
     kprint("sys_open\n");
     return -1;   
 }
 
-int sys_close (regs *r){
+int sys_close(regs *r) {
     kprint("sys_close\n");
     return -1;   
 }
